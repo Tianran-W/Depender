@@ -7,10 +7,12 @@ import { topologicalSort } from './utils/topologicalSort';
 import type { ParsedInput, TopologicalSortResult } from './types';
 
 function App() {
+  const [inputText, setInputText] = useState('');
   const [parsedData, setParsedData] = useState<ParsedInput>({ nodes: [], edges: [] });
   const [sortResult, setSortResult] = useState<TopologicalSortResult>({ sorted: [], hasCycle: false });
 
   const handleInputChange = useCallback((text: string) => {
+    setInputText(text);
     const parsed = parseInput(text);
     setParsedData(parsed);
   }, []);
@@ -19,6 +21,7 @@ function App() {
     const reader = new FileReader();
     reader.onload = (e) => {
       const text = e.target?.result as string;
+      setInputText(text);
       const parsed = parseInput(text);
       setParsedData(parsed);
     };
@@ -53,7 +56,11 @@ function App() {
         <div className="h-full grid grid-cols-12 gap-4 p-4">
           {/* Left Panel - Input */}
           <div className="col-span-3 h-full overflow-auto">
-            <InputPanel onInputChange={handleInputChange} onFileImport={handleFileImport} />
+            <InputPanel
+              inputText={inputText}
+              onInputChange={handleInputChange}
+              onFileImport={handleFileImport}
+            />
           </div>
 
           {/* Center Panel - Graph Visualization */}
