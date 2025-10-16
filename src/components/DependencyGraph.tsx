@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import {
     ReactFlow,
     Controls,
@@ -18,8 +18,8 @@ interface DependencyGraphProps {
 }
 
 export default function DependencyGraph({ nodes, edges }: DependencyGraphProps) {
-    // Convert to ReactFlow format
-    const reactFlowNodes: Node[] = nodes.map((node, index) => ({
+    // Convert to ReactFlow format with useMemo to prevent infinite loops
+    const reactFlowNodes: Node[] = useMemo(() => nodes.map((node, index) => ({
         id: node.id,
         data: { label: node.label },
         position: {
@@ -35,9 +35,9 @@ export default function DependencyGraph({ nodes, edges }: DependencyGraphProps) 
             fontSize: '14px',
             fontWeight: '500',
         },
-    }));
+    })), [nodes]);
 
-    const reactFlowEdges: Edge[] = edges.map((edge, index) => ({
+    const reactFlowEdges: Edge[] = useMemo(() => edges.map((edge, index) => ({
         id: `edge-${index}`,
         source: edge.from,
         target: edge.to,
@@ -48,10 +48,19 @@ export default function DependencyGraph({ nodes, edges }: DependencyGraphProps) 
             type: MarkerType.ArrowClosed,
             color: '#6366f1',
         },
-    }));
+    })), [edges]);
 
-    const [flowNodes, , onNodesChange] = useNodesState(reactFlowNodes);
-    const [flowEdges, , onEdgesChange] = useEdgesState(reactFlowEdges);
+    const [flowNodes, setFlowNodes, onNodesChange] = useNodesState<Node>([]);
+    const [flowEdges, setFlowEdges, onEdgesChange] = useEdgesState<Edge>([]);
+
+    // Update nodes and edges when props change
+    useEffect(() => {
+        setFlowNodes(reactFlowNodes);
+    }, [reactFlowNodes, setFlowNodes]);
+
+    useEffect(() => {
+        setFlowEdges(reactFlowEdges);
+    }, [reactFlowEdges, setFlowEdges]);
 
     const onInit = useCallback(() => {
         console.log('Graph initialized');
@@ -60,7 +69,7 @@ export default function DependencyGraph({ nodes, edges }: DependencyGraphProps) 
     if (nodes.length === 0) {
         return (
             <div className="flex items-center justify-center h-full text-gray-400">
-                <p>No data to visualize. Please enter nodes and dependencies above.</p>
+                <p>暂无数据可视化。请在上方输入节点和依赖关系。</p>
             </div>
         );
     }

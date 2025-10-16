@@ -57,9 +57,9 @@ export function parseInput(text: string): ParsedInput {
  * Export parsed data to text format
  */
 export function exportToText(nodes: string[], edges: { from: string; to: string }[]): string {
-  let output = '# Nodes Section\n';
+  let output = '# 节点部分\n';
   output += nodes.join(', ') + '\n\n';
-  output += '# Dependencies Section\n';
+  output += '# 依赖关系部分\n';
   edges.forEach(edge => {
     output += `${edge.from} -> ${edge.to}\n`;
   });

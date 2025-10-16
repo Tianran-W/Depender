@@ -14,18 +14,18 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'dependencies.txt';
+        a.download = '依赖关系.txt';
         a.click();
         URL.revokeObjectURL(url);
     };
 
     const handleExportSort = () => {
-        const content = `# Topological Sort Result\n${sortResult.sorted.join(' -> ')}`;
+        const content = `# 拓扑排序结果\n${sortResult.sorted.join(' -> ')}`;
         const blob = new Blob([content], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'sorted-dependencies.txt';
+        a.download = '排序结果.txt';
         a.click();
         URL.revokeObjectURL(url);
     };
@@ -33,21 +33,21 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
     return (
         <div className="flex flex-col h-full bg-white rounded-lg shadow-md p-4">
             <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-gray-800">Topological Sort</h2>
+                <h2 className="text-lg font-semibold text-gray-800">拓扑排序</h2>
                 <div className="flex gap-2">
                     <button
                         onClick={handleExportSort}
                         disabled={sortResult.sorted.length === 0}
                         className="px-3 py-1.5 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                     >
-                        Export Sort
+                        导出排序
                     </button>
                     <button
                         onClick={handleExport}
                         disabled={nodes.length === 0}
                         className="px-3 py-1.5 text-sm bg-indigo-500 text-white rounded-md hover:bg-indigo-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                     >
-                        Export Graph
+                        导出图
                     </button>
                 </div>
             </div>
@@ -55,7 +55,7 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
             {sortResult.hasCycle && (
                 <div className="mb-3 p-3 bg-red-50 border border-red-200 rounded-md">
                     <p className="text-sm text-red-700 font-medium">
-                        ⚠️ Cycle Detected! The dependency graph contains a circular dependency.
+                        ⚠️ 检测到循环依赖！依赖图中存在循环。
                     </p>
                 </div>
             )}
@@ -63,7 +63,7 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
             {sortResult.sorted.length > 0 ? (
                 <div className="flex-1 overflow-auto">
                     <div className="mb-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-2">Sorted Order:</h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-2">排序顺序：</h3>
                         <div className="flex flex-wrap gap-2">
                             {sortResult.sorted.map((node, index) => (
                                 <div key={node} className="flex items-center">
@@ -79,20 +79,20 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
                     </div>
 
                     <div className="mt-4 p-3 bg-gray-50 rounded-md">
-                        <h3 className="text-sm font-medium text-gray-700 mb-2">Flattened Result:</h3>
+                        <h3 className="text-sm font-medium text-gray-700 mb-2">扁平化结果：</h3>
                         <p className="font-mono text-sm text-gray-800 break-all">
                             {sortResult.sorted.join(' → ')}
                         </p>
                     </div>
 
                     <div className="mt-4 text-xs text-gray-500">
-                        <p>Total nodes: {sortResult.sorted.length}</p>
-                        <p>Total edges: {edges.length}</p>
+                        <p>节点总数：{sortResult.sorted.length}</p>
+                        <p>边总数：{edges.length}</p>
                     </div>
                 </div>
             ) : (
                 <div className="flex-1 flex items-center justify-center text-gray-400">
-                    <p>No data to sort. Please enter dependencies above.</p>
+                    <p>暂无数据。请在上方输入依赖关系。</p>
                 </div>
             )}
         </div>

@@ -1,50 +1,50 @@
-# Dependency Mapping Tool
+# 依赖关系映射工具
 
-A modern, interactive web application for visualizing and analyzing dependency graphs with topological sorting capabilities.
+一个现代化的交互式 Web 应用，用于可视化和分析依赖关系图，支持拓扑排序功能。
 
-![Dependency Mapping Tool](https://img.shields.io/badge/React-18+-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue) ![Vite](https://img.shields.io/badge/Vite-5+-purple)
+![依赖关系映射工具](https://img.shields.io/badge/React-18+-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue) ![Vite](https://img.shields.io/badge/Vite-5+-purple)
 
-## ✨ Features
+## ✨ 功能特性
 
-- 📝 **Multiple Input Methods**: Direct text input, file import, and export capabilities
-- 🎨 **Interactive Visualization**: Drag, zoom, and pan through dependency graphs
-- 🔄 **Topological Sorting**: Automatic dependency resolution with cycle detection
-- 📤 **Export Functionality**: Export both graph data and sorted results
-- 🎯 **Modern UI**: Clean, minimalist design with Tailwind CSS
-- ⚡ **Fast Performance**: Built with Vite for lightning-fast development and builds
+- 📝 **多种输入方式**：直接文本输入、文件导入和导出功能
+- 🎨 **交互式可视化**：支持拖拽、缩放和平移依赖关系图
+- 🔄 **拓扑排序**：自动解析依赖关系并检测循环依赖
+- 📤 **导出功能**：可导出图数据和排序结果
+- 🎯 **现代化 UI**：简洁优雅的设计，采用 Tailwind CSS
+- ⚡ **高性能**：使用 Vite 构建，开发和构建速度极快
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Prerequisites
+### 系统要求
 
-- Node.js 18+ and npm
+- Node.js 18+ 和 npm
 
-### Installation
+### 安装运行
 
 ```bash
-# Navigate to project directory
+# 进入项目目录
 cd depender
 
-# Install dependencies (already done)
+# 安装依赖（已完成）
 npm install
 
-# Start development server
+# 启动开发服务器
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+应用将在 `http://localhost:5173` 运行
 
-## 📖 Usage Guide
+## 📖 使用指南
 
-### Input Format
+### 输入格式
 
-The tool accepts a two-section format:
+工具接受两部分格式的输入：
 
-```
-# Nodes Section
+```text
+# 节点部分
 A, B, C, D, E
 
-# Dependencies Section
+# 依赖关系部分
 A -> B
 A -> C
 B -> D
@@ -52,98 +52,100 @@ C -> D
 D -> E
 ```
 
-**Section 1: Nodes**
-- Comma-separated list of node identifiers
-- Can use any alphanumeric characters
-- Example: `Node1, Node2, Task_A, TaskB`
+**第一部分：节点**
+- 用逗号分隔的节点标识符列表
+- 可以使用任何字母数字字符
+- 示例：`节点1, 节点2, 任务_A, 任务B`
 
-**Section 2: Dependencies**
-- One dependency per line
-- Format: `Source -> Target`
-- Also supports Unicode arrow: `Source → Target`
-- Example: `A -> B` means "A depends on B" or "B must come before A"
+**第二部分：依赖关系**
+- 每行一个依赖关系
+- 格式：`源节点 -> 目标节点`
+- 也支持 Unicode 箭头：`源节点 → 目标节点`
+- 示例：`A -> B` 表示 "A 依赖于 B" 或 "B 必须在 A 之前"
 
-### Features
+### 功能说明
 
-#### 1. Direct Text Input
-- Type or paste dependency definitions in the left panel
-- Changes are reflected in real-time
-- Default example provided for quick start
+#### 1. 直接文本输入
+- 在左侧面板中输入或粘贴依赖关系定义
+- 实时反映更改
+- 提供默认示例快速上手
 
-#### 2. File Import
-- Click "Import File" button
-- Supports `.txt` and `.dep` files
-- Automatically parses and visualizes the content
+#### 2. 文件导入
+- 点击"导入文件"按钮
+- 支持 `.txt` 和 `.dep` 文件
+- 自动解析并可视化内容
 
-#### 3. Interactive Graph
-- **Zoom**: Use mouse wheel or pinch gesture
-- **Pan**: Click and drag the background
-- **Move Nodes**: Drag individual nodes to rearrange
-- **Controls**: Use on-screen controls for zoom and fit-to-view
+#### 3. 交互式图形
+- **缩放**：使用鼠标滚轮或双指手势
+- **平移**：点击并拖动背景
+- **移动节点**：拖动单个节点重新排列
+- **控制栏**：使用屏幕控制进行缩放和适应视图
 
-#### 4. Topological Sorting
-- Automatically computed when dependencies change
-- Shows linear order respecting all dependencies
-- **Cycle Detection**: Warns if circular dependencies exist
-- **Flattened Output**: Displays complete sorted sequence
+#### 4. 拓扑排序
+- 依赖关系变化时自动计算
+- 显示遵循所有依赖关系的线性顺序
+- **循环检测**：如果存在循环依赖则发出警告
+- **扁平化输出**：显示完整的排序序列
 
-#### 5. Export Options
-- **Export Graph**: Download original dependency definitions
-- **Export Sort**: Download topological sort result
-- Both export as `.txt` files
+#### 5. 导出选项
+- **导出图**：下载原始依赖关系定义
+- **导出排序**：下载拓扑排序结果
+- 两者都导出为 `.txt` 文件
 
-## 🏗️ Project Structure
+## 🏗️ 项目结构
 
-```
+```text
 depender/
 ├── src/
 │   ├── components/
-│   │   ├── InputPanel.tsx       # Input interface component
-│   │   ├── DependencyGraph.tsx  # ReactFlow visualization
-│   │   └── OutputPanel.tsx      # Sorted results display
+│   │   ├── InputPanel.tsx       # 输入界面组件
+│   │   ├── DependencyGraph.tsx  # ReactFlow 可视化
+│   │   └── OutputPanel.tsx      # 排序结果显示
 │   ├── utils/
-│   │   ├── parser.ts            # Input parsing logic
-│   │   └── topologicalSort.ts   # Kahn's algorithm implementation
-│   ├── types.ts                 # TypeScript type definitions
-│   ├── App.tsx                  # Main application component
-│   └── index.css                # Tailwind CSS imports
+│   │   ├── parser.ts            # 输入解析逻辑
+│   │   └── topologicalSort.ts   # Kahn 算法实现
+│   ├── types.ts                 # TypeScript 类型定义
+│   ├── App.tsx                  # 主应用组件
+│   └── index.css                # Tailwind CSS 导入
 ├── public/
 ├── package.json
 ├── vite.config.ts
-├── tailwind.config.js
+├── postcss.config.js
 └── README.md
 ```
 
-## 🛠️ Technology Stack
+## 🛠️ 技术栈
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Build Tool**: Vite 5
-- **Graph Visualization**: ReactFlow (@xyflow/react)
-- **Styling**: Tailwind CSS
-- **Algorithm**: Kahn's Topological Sort (BFS-based)
+- **前端框架**：React 18 + TypeScript
+- **构建工具**：Vite 5
+- **图形可视化**：ReactFlow (@xyflow/react)
+- **样式**：Tailwind CSS v4
+- **算法**：Kahn 拓扑排序（基于 BFS）
 
-## 📝 Examples
+## 📝 示例
 
-### Simple Linear Dependencies
+### 简单线性依赖
+
+```text
+# 节点部分
+安装, 配置, 构建, 测试, 部署
+
+# 依赖关系部分
+安装 -> 配置
+配置 -> 构建
+构建 -> 测试
+测试 -> 部署
 ```
-# Nodes Section
-Install, Configure, Build, Test, Deploy
 
-# Dependencies Section
-Install -> Configure
-Configure -> Build
-Build -> Test
-Test -> Deploy
-```
+**结果**：`安装 → 配置 → 构建 → 测试 → 部署`
 
-**Result**: `Install → Configure → Build → Test → Deploy`
+### 复杂依赖
 
-### Complex Dependencies
-```
-# Nodes Section
+```text
+# 节点部分
 A, B, C, D, E, F
 
-# Dependencies Section
+# 依赖关系部分
 A -> D
 B -> D
 C -> E
@@ -151,74 +153,97 @@ D -> E
 E -> F
 ```
 
-**Result**: One possible order: `A → B → C → D → E → F`
+**结果**：可能的顺序之一：`A → B → C → D → E → F`
 
-### Circular Dependency (Error Case)
-```
-# Nodes Section
+### 循环依赖（错误情况）
+
+```text
+# 节点部分
 A, B, C
 
-# Dependencies Section
+# 依赖关系部分
 A -> B
 B -> C
 C -> A
 ```
 
-**Result**: ⚠️ Cycle detected! No valid topological sort exists.
+**结果**：⚠️ 检测到循环！不存在有效的拓扑排序。
 
-## 🧪 Development
+## 🧪 开发
 
-### Available Scripts
+### 可用脚本
 
 ```bash
-# Start development server
+# 启动开发服务器
 npm run dev
 
-# Build for production
+# 构建生产版本
 npm run build
 
-# Preview production build
+# 预览生产构建
 npm run preview
 
-# Lint code
+# 代码检查
 npm run lint
 ```
 
-### Building for Production
+### 生产构建
 
 ```bash
 npm run build
 ```
 
-The optimized production build will be in the `dist/` directory.
+优化后的生产构建将输出到 `dist/` 目录。
 
-## 🎯 Algorithm Details
+## 🎯 算法详解
 
-The tool uses **Kahn's Algorithm** for topological sorting:
+工具使用 **Kahn 算法** 进行拓扑排序：
 
-1. Calculate in-degree for each node
-2. Add all nodes with in-degree 0 to queue
-3. Process queue:
-   - Remove node from queue
-   - Add to sorted list
-   - Reduce in-degree of neighbors
-   - Add neighbors with in-degree 0 to queue
-4. If sorted list contains all nodes → success
-5. Otherwise → cycle detected
+1. 计算每个节点的入度
+2. 将所有入度为 0 的节点加入队列
+3. 处理队列：
+   - 从队列中移除节点
+   - 添加到排序列表
+   - 减少邻居节点的入度
+   - 将入度为 0 的邻居加入队列
+4. 如果排序列表包含所有节点 → 成功
+5. 否则 → 检测到循环
 
-**Time Complexity**: O(V + E) where V = nodes, E = edges
-**Space Complexity**: O(V + E)
+**时间复杂度**：O(V + E)，其中 V = 节点数，E = 边数
+**空间复杂度**：O(V + E)
 
-## 📄 License
+## 📄 许可证
 
-This project is open source and available under the MIT License.
+本项目采用 MIT 许可证开源。
 
-## 🙏 Acknowledgments
+## 🙏 致谢
 
-- [ReactFlow](https://reactflow.dev/) - Powerful graph visualization library
-- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Vite](https://vitejs.dev/) - Next generation frontend tooling
+- [ReactFlow](https://reactflow.dev/) - 强大的图形可视化库
+- [Tailwind CSS](https://tailwindcss.com/) - 实用优先的 CSS 框架
+- [Vite](https://vitejs.dev/) - 下一代前端构建工具
+
+## 💡 使用技巧
+
+1. **快速开始**：使用默认示例了解格式
+2. **实时预览**：输入时即时查看图形变化
+3. **布局调整**：拖动节点到最佳位置后截图保存
+4. **循环检测**：红色警告会立即提示循环依赖
+5. **批量处理**：从文件导入大量依赖关系
+
+## 🔧 常见问题
+
+**Q: 图形显示为空白？**
+A: 确保输入格式正确，节点和依赖关系部分都要填写。
+
+**Q: 检测到循环依赖怎么办？**
+A: 检查依赖关系，找出并打破循环链。
+
+**Q: 如何保存图形布局？**
+A: 调整好节点位置后，使用浏览器截图功能保存。
+
+**Q: 支持哪些文件格式？**
+A: 支持 `.txt` 和 `.dep` 文本文件。
 
 ---
 
-**Built with ❤️ using React, TypeScript, and modern web technologies**
+**使用 ❤️ 和现代 Web 技术构建**
