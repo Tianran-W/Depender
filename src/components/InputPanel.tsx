@@ -6,15 +6,31 @@ interface InputPanelProps {
 }
 
 export default function InputPanel({ onInputChange, onFileImport }: InputPanelProps) {
-    const [inputText, setInputText] = useState(`# 节点部分
-A, B, C, D, E
-
-# 依赖关系部分
-A -> B
-A -> C
-B -> D
-C -> D
-D -> E`);
+    const [inputText, setInputText] = useState(`nodes:
+  - id: "1"
+    title: "任务A"
+    description: "第一个任务"
+  - id: "2"
+    title: "任务B"
+    description: "依赖于A的任务"
+    dependencies:
+      - "1"
+  - id: "3"
+    title: "任务C"
+    description: "依赖于A的任务"
+    dependencies:
+      - "1"
+  - id: "4"
+    title: "任务D"
+    description: "依赖于B和C的任务"
+    dependencies:
+      - "2"
+      - "3"
+  - id: "5"
+    title: "任务E"
+    description: "最后的任务"
+    dependencies:
+      - "4"`);
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const text = e.target.value;
@@ -61,14 +77,26 @@ D -> E`);
                 value={inputText}
                 onChange={handleTextChange}
                 className="flex-1 w-full p-3 border border-gray-300 rounded-md font-mono text-sm resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="在此输入依赖关系图...&#10;&#10;格式：&#10;# 节点部分&#10;A, B, C&#10;&#10;# 依赖关系部分&#10;A -> B&#10;B -> C"
+                placeholder={`在此输入依赖关系图...
+
+YAML 格式：
+nodes:
+  - id: "1"
+    title: "节点A"
+    description: "描述"
+  - id: "2"
+    title: "节点B"
+    dependencies:
+      - "1"`}
             />
 
             <div className="mt-3 text-xs text-gray-500">
-                <p className="font-medium mb-1">格式说明：</p>
-                <p>• 节点：用逗号分隔的列表</p>
-                <p>• 依赖关系：使用 "A -&gt; B" 格式</p>
-                <p>• 注释：以 # 开头</p>
+                <p className="font-medium mb-1">YAML 格式说明：</p>
+                <p>• nodes: 声明所有节点</p>
+                <p className="ml-3">- id: 节点唯一标识（必需）</p>
+                <p className="ml-3">- title: 节点标题（必需）</p>
+                <p className="ml-3">- description: 节点描述（可选）</p>
+                <p className="ml-3">- dependencies: 依赖的前置节点ID列表（可选）</p>
             </div>
         </div>
     );

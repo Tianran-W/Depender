@@ -12,6 +12,7 @@
   "dependencies": {
     "@xyflow/react": "^12.8.6",
     "autoprefixer": "^10.4.21",
+    "js-yaml": "^4.1.0",
     "postcss": "^8.5.6",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@tailwindcss/postcss": "^4.1.14",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.6.0",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",

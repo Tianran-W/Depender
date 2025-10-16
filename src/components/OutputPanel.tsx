@@ -1,20 +1,20 @@
-import type { TopologicalSortResult } from '../types';
-import { exportToText } from '../utils/parser';
+import type { TopologicalSortResult, DependencyNode } from '../types';
+import { exportToYaml } from '../utils/parser';
 
 interface OutputPanelProps {
     sortResult: TopologicalSortResult;
-    nodes: string[];
+    nodes: DependencyNode[];
     edges: { from: string; to: string }[];
 }
 
 export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelProps) {
-    const handleExport = () => {
-        const content = exportToText(nodes, edges);
-        const blob = new Blob([content], { type: 'text/plain' });
+    const handleExportYaml = () => {
+        const content = exportToYaml(nodes, edges);
+        const blob = new Blob([content], { type: 'text/yaml' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = '依赖关系.txt';
+        a.download = '依赖关系.yaml';
         a.click();
         URL.revokeObjectURL(url);
     };
@@ -43,11 +43,11 @@ export default function OutputPanel({ sortResult, nodes, edges }: OutputPanelPro
                         导出排序
                     </button>
                     <button
-                        onClick={handleExport}
+                        onClick={handleExportYaml}
                         disabled={nodes.length === 0}
-                        className="px-3 py-1.5 text-sm bg-indigo-500 text-white rounded-md hover:bg-indigo-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+                        className="px-3 py-1.5 text-sm bg-purple-500 text-white rounded-md hover:bg-purple-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
                     >
-                        导出图
+                        导出YAML
                     </button>
                 </div>
             </div>

@@ -61,9 +61,19 @@ function App() {
             <div className="h-full flex flex-col">
               <div className="px-4 py-3 border-b border-gray-200">
                 <h2 className="text-lg font-semibold text-gray-800">依赖关系图</h2>
+                {sortResult.hasCycle && (
+                  <p className="text-xs text-red-600 mt-1">⚠️ 检测到循环依赖，使用网格布局</p>
+                )}
+                {!sortResult.hasCycle && sortResult.sorted.length > 0 && (
+                  <p className="text-xs text-green-600 mt-1">✓ 已按拓扑排序布局</p>
+                )}
               </div>
               <div className="flex-1">
-                <DependencyGraph nodes={parsedData.nodes} edges={parsedData.edges} />
+                <DependencyGraph
+                  nodes={parsedData.nodes}
+                  edges={parsedData.edges}
+                  sortResult={sortResult}
+                />
               </div>
             </div>
           </div>
@@ -72,7 +82,7 @@ function App() {
           <div className="col-span-3 h-full overflow-auto">
             <OutputPanel
               sortResult={sortResult}
-              nodes={parsedData.nodes.map(n => n.id)}
+              nodes={parsedData.nodes}
               edges={parsedData.edges}
             />
           </div>
